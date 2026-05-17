@@ -9,6 +9,8 @@
 
 .logo {
   margin-bottom: 40px;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 nav {
@@ -17,13 +19,15 @@ nav {
 }
 
 nav a {
-  color: white;
+  color: #cbd5e1;
   text-decoration: none;
   margin-bottom: 20px;
-  font-size: 16px;
+  padding: 10px;
+  border-radius: 8px;
   transition: 0.3s;
 }
 
 nav a:hover {
-  color: #38bdf8;
+  background-color: #1e293b;
+  color: white;
 }
