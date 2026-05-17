@@ -16,4 +16,11 @@ export class AuthService {
       userData
     );
   }
+
+  login(userData: any) {
+    return this.http.post(
+      `${this.apiUrl}/login.php`,
+      userData
+    );
+  }
 }
