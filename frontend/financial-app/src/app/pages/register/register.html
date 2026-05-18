@@ -2,31 +2,33 @@
 
   <div class="register-card">
 
-    <div class="left-section">
+    <!-- TOP SECTION -->
+
+    <div class="top-section">
 
       <h1>
-        Crie sua conta no <span>HATinFinance</span>
+        Crie sua conta no
+        <span>HATinFinance</span>
       </h1>
 
-      <p>
-        Organize suas finanças pessoais com
-        gráficos inteligentes, metas financeiras
-        e relatórios completos.
+      <p class="description">
+        Organize suas finanças pessoais com gráficos inteligentes,
+        metas financeiras e relatórios completos.
       </p>
 
       <div class="features">
 
-        <div class="feature">
+        <div class="feature-item">
           <div class="dot"></div>
           <span>Dashboard financeiro moderno</span>
         </div>
 
-        <div class="feature">
+        <div class="feature-item">
           <div class="dot"></div>
           <span>Controle de receitas e despesas</span>
         </div>
 
-        <div class="feature">
+        <div class="feature-item">
           <div class="dot"></div>
           <span>Relatórios e metas financeiras</span>
         </div>
@@ -35,50 +37,216 @@
 
     </div>
 
-    <div class="right-section">
+    <!-- FORM SECTION -->
 
-      <form class="register-form" (ngSubmit)="register()">
+    <div class="form-section">
 
-        <h2>Criar Conta</h2>
+      <h2>Criar Conta</h2>
 
-        <p class="subtitle">
-          Comece agora sua organização financeira
-        </p>
+      <p class="subtitle">
+        Comece agora sua organização financeira
+      </p>
 
-        <input
-          type="text"
-          placeholder="Nome"
-          [(ngModel)]="name"
-          name="name"
+      <form (ngSubmit)="register()">
+
+        <!-- NAME -->
+
+        <label>Nome</label>
+
+        <div class="input-container">
+
+          <div class="icon">
+            <i class="bi bi-person"></i>
+          </div>
+
+          <input
+            type="text"
+            placeholder="Digite seu nome completo"
+            [(ngModel)]="name"
+            name="name"
+            required
+          >
+
+        </div>
+
+        <small>Ex: João da Silva</small>
+
+        <!-- EMAIL -->
+
+        <label>Email</label>
+
+        <div class="input-container">
+
+          <div class="icon">
+            <i class="bi bi-envelope"></i>
+          </div>
+
+          <input
+            type="email"
+            placeholder="Digite seu email"
+            [(ngModel)]="email"
+            name="email"
+            required
+          >
+
+        </div>
+
+        <small>Ex: joao@email.com</small>
+
+        <!-- PASSWORD -->
+
+        <label>Senha</label>
+
+        <div class="input-container">
+
+          <div class="icon">
+            <i class="bi bi-lock"></i>
+          </div>
+
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            placeholder="Senha forte"
+
+            [(ngModel)]="password"
+            name="password"
+
+            (copy)="$event.preventDefault()"
+            (paste)="$event.preventDefault()"
+
+            required
+          >
+
+          <button
+            type="button"
+            class="eye-button"
+            (click)="togglePassword()"
+          >
+            <i
+              class="bi"
+              [ngClass]="
+                showPassword
+                  ? 'bi-eye-slash'
+                  : 'bi-eye'
+              "
+            ></i>
+          </button>
+
+        </div>
+
+        <small>
+          Use pelo menos 8 caracteres.
+        </small>
+
+        <!-- PASSWORD RULES -->
+
+        <div class="password-rules">
+
+          <h3>Força da senha:</h3>
+
+          <p [class.valid]="hasMinLength()">
+            ● Mínimo 8 caracteres
+          </p>
+
+          <p [class.valid]="hasUpperCase()">
+            ● Pelo menos uma letra maiúscula
+          </p>
+
+          <p [class.valid]="hasLowerCase()">
+            ● Pelo menos uma letra minúscula
+          </p>
+
+          <p [class.valid]="hasNumber()">
+            ● Pelo menos um número
+          </p>
+
+          <p [class.valid]="hasSpecialCharacter()">
+            ● Pelo menos um caractere especial
+          </p>
+
+        </div>
+
+        <!-- CONFIRM PASSWORD -->
+
+        <label>Confirmar senha</label>
+
+        <div class="input-container">
+
+          <div class="icon">
+            <i class="bi bi-lock"></i>
+          </div>
+
+          <input
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            placeholder="Confirmar senha"
+
+            [(ngModel)]="confirmPassword"
+            name="confirmPassword"
+
+            (copy)="$event.preventDefault()"
+            (paste)="$event.preventDefault()"
+
+            required
+          >
+
+          <button
+            type="button"
+            class="eye-button"
+            (click)="toggleConfirmPassword()"
+          >
+            <i
+              class="bi"
+              [ngClass]="
+                showConfirmPassword
+                  ? 'bi-eye-slash'
+                  : 'bi-eye'
+              "
+            ></i>
+          </button>
+
+        </div>
+
+        <small
+          class="error-message"
+          *ngIf="
+            confirmPassword &&
+            password !== confirmPassword
+          "
         >
+          As senhas devem coincidir.
+        </small>
 
-        <input
-          type="email"
-          placeholder="Email"
-          [(ngModel)]="email"
-          name="email"
+        <!-- SECURITY BOX -->
+
+        <div class="security-box">
+
+          <h4>🛡 Segurança</h4>
+
+          <p>
+            Não é permitido copiar, colar ou usar atalhos
+            nos campos de senha.
+          </p>
+
+        </div>
+
+        <!-- BUTTON -->
+
+        <button
+          type="submit"
+          class="register-button"
+          [disabled]="!isFormValid()"
         >
-
-        <input
-          type="password"
-          placeholder="Senha"
-          [(ngModel)]="password"
-          name="password"
-        >
-
-        <button type="submit">
           Criar Conta
         </button>
 
-        <div class="bottom-text">
+        <!-- LOGIN -->
 
-          <span>Já possui conta?</span>
+        <p class="login-link">
+          Já possui uma conta?
 
           <a routerLink="/login">
-            Iniciar Sessão
+            Iniciar sessão
           </a>
-
-        </div>
+        </p>
 
       </form>
 

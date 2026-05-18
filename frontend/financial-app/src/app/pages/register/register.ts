@@ -1,22 +1,16 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-
-import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-register',
-
   standalone: true,
-
   imports: [
     CommonModule,
     FormsModule,
     RouterLink
   ],
-
   templateUrl: './register.html',
   styleUrl: './register.css'
 })
@@ -26,39 +20,69 @@ export class RegisterComponent {
   name = '';
   email = '';
   password = '';
+  confirmPassword = '';
 
-  constructor(
-    private authService: AuthService
-  ) {}
+  showPassword = false;
+  showConfirmPassword = false;
+
+  togglePassword() {
+    this.showPassword =
+      !this.showPassword;
+  }
+
+  toggleConfirmPassword() {
+    this.showConfirmPassword =
+      !this.showConfirmPassword;
+  }
+
+  hasMinLength() {
+    return this.password.length >= 8;
+  }
+
+  hasUpperCase() {
+    return /[A-Z]/.test(this.password);
+  }
+
+  hasLowerCase() {
+    return /[a-z]/.test(this.password);
+  }
+
+  hasNumber() {
+    return /[0-9]/.test(this.password);
+  }
+
+  hasSpecialCharacter() {
+    return /[!@#$%^&*]/.test(this.password);
+  }
+
+  isFormValid() {
+
+    return (
+
+      this.name &&
+      this.email &&
+      this.password &&
+      this.confirmPassword &&
+
+      this.password === this.confirmPassword &&
+
+      this.hasMinLength() &&
+      this.hasUpperCase() &&
+      this.hasLowerCase() &&
+      this.hasNumber() &&
+      this.hasSpecialCharacter()
+
+    );
+
+  }
 
   register() {
 
-    const userData = {
-      name: this.name,
-      email: this.email,
-      password: this.password
-    };
+    if(!this.isFormValid()) {
+      return;
+    }
 
-    this.authService.register(userData)
-      .subscribe({
-
-        next: (response) => {
-
-          console.log(response);
-
-          alert('User registered successfully!');
-
-        },
-
-        error: (error) => {
-
-          console.error(error);
-
-          alert('Error during registration');
-
-        }
-
-      });
+    console.log('Conta criada');
 
   }
 
