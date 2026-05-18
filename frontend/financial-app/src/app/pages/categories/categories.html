@@ -1,1 +1,115 @@
-<p>categories works!</p>
+<app-sidebar></app-sidebar>
+
+<div class="categories-page">
+
+  <!-- TOPBAR -->
+
+  <div class="topbar">
+
+    <div>
+
+      <h1>Categories</h1>
+
+      <p>
+        Organize your financial categories
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- ADD CATEGORY -->
+
+  <div class="add-category-card">
+
+    <h2>Add Category</h2>
+
+    <form
+      (ngSubmit)="addCategory()"
+    >
+
+      <input
+
+        type="text"
+
+        placeholder="Category name"
+
+        [(ngModel)]="name"
+
+        name="name"
+
+      >
+
+      <select
+
+        [(ngModel)]="type"
+
+        name="type"
+
+      >
+
+        <option>
+          Income
+        </option>
+
+        <option>
+          Expense
+        </option>
+
+      </select>
+
+      <button type="submit">
+
+        <i class="bi bi-plus-lg"></i>
+
+        Add
+
+      </button>
+
+    </form>
+
+  </div>
+
+  <!-- CATEGORY LIST -->
+
+  <div class="categories-grid">
+
+    <div
+      class="category-card"
+
+      *ngFor="
+        let category of categories
+      "
+    >
+
+      <div class="category-icon">
+
+        <i class="bi bi-tag"></i>
+
+      </div>
+
+      <h3>
+        {{ category.name }}
+      </h3>
+
+      <span
+        class="category-type"
+
+        [class.income]="
+          category.type === 'Income'
+        "
+
+        [class.expense]="
+          category.type === 'Expense'
+        "
+      >
+
+        {{ category.type }}
+
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
