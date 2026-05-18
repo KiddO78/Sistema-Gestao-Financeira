@@ -1,27 +1,133 @@
-<div class="login-container">
+<div class="login-page">
 
-  <h1>Login</h1>
+  <div class="login-card">
 
-  <form (ngSubmit)="login()">
+    <div class="left-section">
 
-    <input
-      type="email"
-      placeholder="Email"
-      [(ngModel)]="email"
-      name="email"
-    >
+      <h1>
+        Bem-vindo ao <span>HATinFinance</span>
+      </h1>
 
-    <input
-      type="password"
-      placeholder="Password"
-      [(ngModel)]="password"
-      name="password"
-    >
+      <p>
+        Controle suas finanças de forma inteligente,
+        moderna e segura.
+      </p>
 
-    <button type="submit">
-      Login
-    </button>
+      <div class="features">
 
-  </form>
+        <div class="feature">
+          <div class="dot"></div>
+          <span>Controle de despesas</span>
+        </div>
+
+        <div class="feature">
+          <div class="dot"></div>
+          <span>Metas financeiras</span>
+        </div>
+
+        <div class="feature">
+          <div class="dot"></div>
+          <span>Relatórios inteligentes</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="right-section">
+
+      <form class="login-form" (ngSubmit)="login()">
+
+        <h2>Iniciar Sessão</h2>
+
+        <p class="subtitle">
+          Entre na sua conta para continuar
+        </p>
+
+        <input
+          type="email"
+          placeholder="Email"
+          [(ngModel)]="email"
+          name="email"
+        >
+
+        <input
+          type="password"
+          placeholder="Senha"
+          [(ngModel)]="password"
+          name="password"
+        >
+
+        <div class="login-options">
+
+        <label class="remember-me">
+
+            <input type="checkbox">
+
+            <span>Lembrar-me</span>
+
+        </label>
+
+        <a href="#">
+            Esqueceu a senha?
+        </a>
+
+        </div>
+
+        <button type="submit">
+          Entrar
+        </button>
+
+        <div class="divider">
+
+        <div class="line"></div>
+
+        <span>ou</span>
+
+        <div class="line"></div>
+
+        </div>
+
+        <div class="social-buttons">
+
+        <button class="google-btn">
+
+            <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
+            alt="Google"
+            >
+
+            Continuar com Google
+
+        </button>
+
+        <button class="apple-btn">
+
+            <img
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg"
+            alt="Apple"
+            >
+
+            Continuar com Apple
+
+        </button>
+
+        </div>
+
+        <div class="bottom-text">
+
+          <span>Não possui conta?</span>
+
+          <a routerLink="/register">
+            Criar Conta
+          </a>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
 
 </div>

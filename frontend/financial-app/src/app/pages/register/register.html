@@ -1,34 +1,89 @@
-<div class="register-container">
+<div class="register-page">
 
-  <h1>Create Account</h1>
+  <div class="register-card">
 
-  <form (ngSubmit)="register()">
+    <div class="left-section">
 
-    <input
-      type="text"
-      placeholder="Name"
-      [(ngModel)]="name"
-      name="name"
-    >
+      <h1>
+        Crie sua conta no <span>HATinFinance</span>
+      </h1>
 
-    <input
-      type="email"
-      placeholder="Email"
-      [(ngModel)]="email"
-      name="email"
-    >
+      <p>
+        Organize suas finanças pessoais com
+        gráficos inteligentes, metas financeiras
+        e relatórios completos.
+      </p>
 
-    <input
-      type="password"
-      placeholder="Password"
-      [(ngModel)]="password"
-      name="password"
-    >
+      <div class="features">
 
-    <button type="submit">
-      Register
-    </button>
+        <div class="feature">
+          <div class="dot"></div>
+          <span>Dashboard financeiro moderno</span>
+        </div>
 
-  </form>
+        <div class="feature">
+          <div class="dot"></div>
+          <span>Controle de receitas e despesas</span>
+        </div>
+
+        <div class="feature">
+          <div class="dot"></div>
+          <span>Relatórios e metas financeiras</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="right-section">
+
+      <form class="register-form" (ngSubmit)="register()">
+
+        <h2>Criar Conta</h2>
+
+        <p class="subtitle">
+          Comece agora sua organização financeira
+        </p>
+
+        <input
+          type="text"
+          placeholder="Nome"
+          [(ngModel)]="name"
+          name="name"
+        >
+
+        <input
+          type="email"
+          placeholder="Email"
+          [(ngModel)]="email"
+          name="email"
+        >
+
+        <input
+          type="password"
+          placeholder="Senha"
+          [(ngModel)]="password"
+          name="password"
+        >
+
+        <button type="submit">
+          Criar Conta
+        </button>
+
+        <div class="bottom-text">
+
+          <span>Já possui conta?</span>
+
+          <a routerLink="/login">
+            Iniciar Sessão
+          </a>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
 
 </div>

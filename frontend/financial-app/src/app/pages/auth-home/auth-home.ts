@@ -1,27 +1,19 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-import { Router, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 import { AuthService } from '../../services/auth';
 
 @Component({
-  selector: 'app-login',
-
+  selector: 'app-auth-home',
   standalone: true,
-
-  imports: [
-    CommonModule,
-    FormsModule,
-    RouterLink
-  ],
-
-  templateUrl: './login.html',
-  styleUrl: './login.css'
+  imports: [CommonModule, FormsModule, RouterLink],
+  templateUrl: './auth-home.html',
+  styleUrl: './auth-home.css'
 })
-
-export class LoginComponent {
+export class AuthHomeComponent {
 
   email = '';
   password = '';
@@ -40,7 +32,6 @@ export class LoginComponent {
 
     this.authService.login(userData)
       .subscribe({
-
         next: (response: any) => {
 
           if(response.success) {
@@ -58,13 +49,8 @@ export class LoginComponent {
         },
 
         error: (error) => {
-
           console.error(error);
-
-          alert('Error during login');
-
         }
-
       });
 
   }
