@@ -11,32 +11,17 @@ $data = json_decode(
     true
 );
 
-$title = $data["title"];
-$amount = $data["amount"];
-$type = $data["type"];
-$category = $data["category"];
+$id = $data["id"];
 
 $sql = "
-INSERT INTO transactions
-(
-    title,
-    amount,
-    type,
-    category
-)
-VALUES
-(
-    '$title',
-    '$amount',
-    '$type',
-    '$category'
-)
+DELETE FROM transactions
+WHERE id = '$id'
 ";
 
 if($conn->query($sql) === TRUE) {
 
     echo json_encode([
-        "message" => "Transaction added successfully"
+        "message" => "Deleted"
     ]);
 
 }

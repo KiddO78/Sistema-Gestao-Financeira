@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { CommonModule }
-from '@angular/common';
+import { CommonModule } from '@angular/common';
 
-import { FormsModule }
-from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+
+import { HttpClient } from '@angular/common/http';
 
 import { SidebarComponent }
 from '../../components/sidebar/sidebar';
 
 @Component({
+
   selector: 'app-transactions',
 
   standalone: true,
@@ -23,9 +24,10 @@ from '../../components/sidebar/sidebar';
   templateUrl: './transactions.html',
 
   styleUrl: './transactions.css'
+
 })
 
-export class TransactionsComponent {
+export class TransactionsComponent implements OnInit {
 
   showModal = false;
 
@@ -36,9 +38,18 @@ export class TransactionsComponent {
   amount = 0;
   type = 'Income';
 
-  testModal() {
+  constructor(
+    private http: HttpClient
+  ) {
+  }
 
-    console.log('BUTTON CLICKED');
+  ngOnInit() {
+
+    this.loadTransactions();
+
+  }
+
+  testModal() {
 
     this.showModal = true;
 
@@ -46,35 +57,105 @@ export class TransactionsComponent {
 
   addTransaction() {
 
-    const newTransaction = {
+    const transaction = {
 
       title: this.title,
-      category: this.category,
+
       amount: this.amount,
-      type: this.type
+
+      type: this.type,
+
+      category: this.category
 
     };
 
-    this.transactions.push(newTransaction);
+    this.http.post(
 
-    this.showModal = false;
+      'http://localhost:8000/routes/add_transaction.php',
 
-    this.clearForm();
+      transaction
+
+    ).subscribe({
+
+      next: () => {
+
+        this.loadTransactions();
+
+        this.clearForm();
+
+        this.showModal = false;
+
+      },
+
+      error: (err) => {
+
+        console.log(err);
+
+      }
+
+    });
+
+  }
+
+  loadTransactions() {
+
+    this.http.get<any[]>(
+      'http://localhost:8000/routes/get_transactions.php'
+    ).subscribe({
+
+      next: (data) => {
+
+        console.log(data);
+
+        this.transactions = [...data];
+
+      },
+
+      error: (err) => {
+
+        console.log(err);
+
+      }
+
+    });
 
   }
 
   clearForm() {
 
     this.title = '';
+
     this.category = '';
+
     this.amount = 0;
+
     this.type = 'Income';
 
   }
 
-  testButton() {
+  deleteTransaction(id: number) {
 
-    alert('BUTTON WORKING');
+    this.http.post(
+
+      'http://localhost:8000/routes/delete_transaction.php',
+
+      { id }
+
+    ).subscribe({
+
+      next: () => {
+
+        this.loadTransactions();
+
+      },
+
+      error: (err) => {
+
+        console.log(err);
+
+      }
+
+    });
 
   }
 

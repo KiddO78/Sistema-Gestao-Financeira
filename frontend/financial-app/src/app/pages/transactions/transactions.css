@@ -322,3 +322,32 @@ select {
   cursor: pointer;
 
 }
+
+.delete-button {
+
+  width: 45px;
+  height: 45px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background:
+    rgba(239,68,68,0.15);
+
+  color: #ef4444;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+
+}
+
+.delete-button:hover {
+
+  transform: scale(1.1);
+
+  background:
+    rgba(239,68,68,0.25);
+
+}

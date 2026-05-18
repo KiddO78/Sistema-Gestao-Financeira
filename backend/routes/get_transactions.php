@@ -3,19 +3,29 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
-include("../config/database.php");
-
-$sql = "SELECT * FROM transactions
-ORDER BY created_at DESC";
-
-$result = $conn->query($sql);
+include "../config/database.php";
 
 $transactions = [];
 
-while($row = $result->fetch_assoc()) {
+$sql = "
+SELECT *
+FROM transactions
+ORDER BY id DESC
+";
 
-    $transactions[] = $row;
+$result = $conn->query($sql);
+
+if($result) {
+
+    while($row = $result->fetch_assoc()) {
+
+        $transactions[] = $row;
+
+    }
 
 }
 
 echo json_encode($transactions);
+
+$conn->close();
+exit;
