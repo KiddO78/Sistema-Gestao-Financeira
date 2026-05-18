@@ -122,36 +122,60 @@
 
       </div>
 
-      <form>
+      <form (ngSubmit)="addTransaction()">
 
         <label>Title</label>
 
         <input
-          type="text"
-          placeholder="Transaction title"
+            type="text"
+
+            placeholder="Transaction title"
+
+            [(ngModel)]="title"
+
+            name="title"
         >
 
         <label>Category</label>
 
         <input
-          type="text"
-          placeholder="Category"
+            type="text"
+
+            placeholder="Category"
+
+            [(ngModel)]="category"
+
+            name="category"
         >
 
         <label>Amount</label>
 
         <input
-          type="number"
-          placeholder="Amount"
+            type="number"
+
+            placeholder="Amount"
+
+            [(ngModel)]="amount"
+
+            name="amount"
         >
 
         <label>Type</label>
 
-        <select>
+        <select
 
-          <option>Income</option>
+            [(ngModel)]="type"
 
-          <option>Expense</option>
+            name="type"
+            >
+
+            <option>
+                Income
+            </option>
+
+            <option>
+                Expense
+            </option>
 
         </select>
 

@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 
-import { CommonModule } from '@angular/common';
+import { CommonModule }
+from '@angular/common';
+
+import { FormsModule }
+from '@angular/forms';
 
 import { SidebarComponent }
 from '../../components/sidebar/sidebar';
@@ -12,6 +16,7 @@ from '../../components/sidebar/sidebar';
 
   imports: [
     CommonModule,
+    FormsModule,
     SidebarComponent
   ],
 
@@ -24,29 +29,53 @@ export class TransactionsComponent {
 
   showModal = false;
 
-  transactions = [
+  transactions: any[] = [];
 
-    {
-      title: 'Salary',
-      category: 'Income',
-      type: 'Income',
-      amount: 320000
-    },
+  title = '';
+  category = '';
+  amount = 0;
+  type = 'Income';
 
-    {
-      title: 'Internet',
-      category: 'Bills',
-      type: 'Expense',
-      amount: 15000
-    },
+  testModal() {
 
-    {
-      title: 'Food',
-      category: 'Shopping',
-      type: 'Expense',
-      amount: 40000
-    }
+    console.log('BUTTON CLICKED');
 
-  ];
+    this.showModal = true;
+
+  }
+
+  addTransaction() {
+
+    const newTransaction = {
+
+      title: this.title,
+      category: this.category,
+      amount: this.amount,
+      type: this.type
+
+    };
+
+    this.transactions.push(newTransaction);
+
+    this.showModal = false;
+
+    this.clearForm();
+
+  }
+
+  clearForm() {
+
+    this.title = '';
+    this.category = '';
+    this.amount = 0;
+    this.type = 'Income';
+
+  }
+
+  testButton() {
+
+    alert('BUTTON WORKING');
+
+  }
 
 }
