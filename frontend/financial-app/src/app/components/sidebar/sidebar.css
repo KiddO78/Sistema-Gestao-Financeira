@@ -1,34 +1,118 @@
 .sidebar {
-  width: 240px;
+
+  width: 280px;
+
   height: 100vh;
-  background-color: white;
-  border-right: 1px solid #e2e8f0;
+
   position: fixed;
-  padding: 20px;
+
+  left: 0;
+  top: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      #0f172a,
+      #111827
+    );
+
+  border-right:
+    1px solid rgba(255,255,255,0.06);
+
+  padding: 30px;
+
 }
 
 .logo {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 40px;
-  color: #0f172a;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-bottom: 60px;
+
+}
+
+.logo-icon {
+
+  width: 50px;
+  height: 50px;
+
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7c3aed,
+      #8b5cf6
+    );
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+
+  font-size: 22px;
+
+}
+
+.logo h2 {
+
+  color: white;
+
+  font-size: 28px;
+
 }
 
 nav {
+
   display: flex;
+
   flex-direction: column;
+
+  gap: 15px;
+
 }
 
 nav a {
+
+  height: 65px;
+
+  border-radius: 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  padding: 0 20px;
+
   text-decoration: none;
-  color: #475569;
-  padding: 12px;
-  margin-bottom: 10px;
-  border-radius: 10px;
+
+  color: #cbd5e1;
+
+  font-size: 18px;
+
   transition: 0.3s;
+
 }
 
 nav a:hover {
-  background-color: #ede9fe;
-  color: #7c3aed;
+
+  background:
+    rgba(139,92,246,0.15);
+
+  color: white;
+
+}
+
+nav a i {
+
+  font-size: 22px;
+
 }

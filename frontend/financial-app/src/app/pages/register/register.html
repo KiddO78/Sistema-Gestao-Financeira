@@ -69,13 +69,21 @@
 
         </div>
 
-        <small>Ex: João da Silva</small>
+        <small>
+          Ex: João da Silva
+        </small>
 
         <!-- EMAIL -->
 
         <label>Email</label>
 
-        <div class="input-container">
+        <div
+          class="input-container"
+          [class.invalid-container]="
+            emailInput.invalid &&
+            (emailInput.touched || emailInput.dirty)
+          "
+        >
 
           <div class="icon">
             <i class="bi bi-envelope"></i>
@@ -83,15 +91,38 @@
 
           <input
             type="email"
+
             placeholder="Digite seu email"
+
             [(ngModel)]="email"
+
             name="email"
+
             required
+
+            #emailInput="ngModel"
           >
 
         </div>
 
-        <small>Ex: joao@email.com</small>
+        <small
+          class="error-message"
+          *ngIf="
+            emailInput.invalid &&
+            (emailInput.touched || emailInput.dirty)
+          "
+        >
+          Email inválido
+        </small>
+
+        <small
+          *ngIf="
+            !emailInput.invalid ||
+            !emailInput.touched
+          "
+        >
+          Ex: joao@email.com
+        </small>
 
         <!-- PASSWORD -->
 
@@ -105,13 +136,16 @@
 
           <input
             [type]="showPassword ? 'text' : 'password'"
+
             placeholder="Senha forte"
 
             [(ngModel)]="password"
+
             name="password"
 
             (copy)="$event.preventDefault()"
             (paste)="$event.preventDefault()"
+            (cut)="$event.preventDefault()"
 
             required
           >
@@ -121,6 +155,7 @@
             class="eye-button"
             (click)="togglePassword()"
           >
+
             <i
               class="bi"
               [ngClass]="
@@ -129,6 +164,7 @@
                   : 'bi-eye'
               "
             ></i>
+
           </button>
 
         </div>
@@ -177,13 +213,16 @@
 
           <input
             [type]="showConfirmPassword ? 'text' : 'password'"
+
             placeholder="Confirmar senha"
 
             [(ngModel)]="confirmPassword"
+
             name="confirmPassword"
 
             (copy)="$event.preventDefault()"
             (paste)="$event.preventDefault()"
+            (cut)="$event.preventDefault()"
 
             required
           >
@@ -193,6 +232,7 @@
             class="eye-button"
             (click)="toggleConfirmPassword()"
           >
+
             <i
               class="bi"
               [ngClass]="
@@ -201,6 +241,7 @@
                   : 'bi-eye'
               "
             ></i>
+
           </button>
 
         </div>
@@ -219,7 +260,10 @@
 
         <div class="security-box">
 
-          <h4>🛡 Segurança</h4>
+          <h4>
+            <i class="bi bi-shield-lock"></i>
+            Segurança
+          </h4>
 
           <p>
             Não é permitido copiar, colar ou usar atalhos
@@ -241,11 +285,13 @@
         <!-- LOGIN -->
 
         <p class="login-link">
+
           Já possui uma conta?
 
           <a routerLink="/login">
             Iniciar sessão
           </a>
+
         </p>
 
       </form>

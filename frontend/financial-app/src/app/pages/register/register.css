@@ -393,3 +393,118 @@ small {
   margin-right: 10px;
 
 }
+
+/* INPUT FOCUS */
+
+.input-container:focus-within {
+
+  border: 1px solid #8b5cf6;
+
+  box-shadow:
+    0 0 15px rgba(139,92,246,0.3);
+
+  transition: 0.3s;
+
+}
+
+/* EMAIL INVÁLIDO */
+
+.input-container.invalid-container {
+
+  border: 2px solid #ef4444 !important;
+
+  box-shadow:
+    0 0 12px rgba(239,68,68,0.35);
+
+}
+
+/* INPUT INVÁLIDO */
+
+.invalid {
+
+  border: 1px solid #ef4444 !important;
+
+}
+
+/* ERROR MESSAGE */
+
+.error-message {
+
+  color: #ef4444;
+
+  margin-top: 12px;
+
+  display: block;
+
+  font-size: 16px;
+
+  font-weight: 500;
+
+}
+
+/* INPUT TRANSITIONS */
+
+.input-container {
+
+  transition:
+    border 0.3s ease,
+    box-shadow 0.3s ease;
+
+}
+
+/* BUTTON HOVER */
+
+.register-button:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 10px 20px rgba(139,92,246,0.3);
+
+  transition: 0.3s;
+
+}
+
+/* LINKS */
+
+.login-link a:hover {
+
+  text-decoration: underline;
+
+}
+
+/* EYE BUTTON */
+
+.eye-button {
+
+  background: transparent !important;
+
+  border: none !important;
+
+  width: 70px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  cursor: pointer;
+
+}
+
+/* PASSWORD RULES */
+
+.password-rules p {
+
+  transition: 0.3s;
+
+}
+
+.password-rules p.valid {
+
+  color: #8b5cf6;
+
+  transform: translateX(5px);
+
+}
