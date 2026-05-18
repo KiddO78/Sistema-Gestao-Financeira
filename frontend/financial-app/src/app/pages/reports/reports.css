@@ -136,3 +136,54 @@
   margin-bottom: 30px;
 
 }
+
+/* EXPORT */
+
+.export-buttons {
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  margin-bottom: 30px;
+
+}
+
+.csv-button {
+
+  height: 60px;
+
+  padding: 0 30px;
+
+  border: none;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #059669,
+      #10b981
+    );
+
+  color: white;
+
+  font-size: 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+
+}
+
+.csv-button:hover {
+
+  transform: translateY(-3px);
+
+}

@@ -42,6 +42,8 @@ implements OnInit, AfterViewInit {
 
   chart: any;
 
+  transactions: any[] = [];
+
   constructor(
     private http: HttpClient
   ) {}
@@ -49,6 +51,7 @@ implements OnInit, AfterViewInit {
   ngOnInit(): void {
 
     this.loadStats();
+    this.loadTransactions();
 
   }
 
@@ -198,6 +201,76 @@ implements OnInit, AfterViewInit {
       }
 
     );
+
+  }
+
+  loadTransactions() {
+
+    this.http.get<any[]>(
+
+      'http://localhost:8000/routes/get_transactions.php'
+
+    ).subscribe({
+
+      next: (data) => {
+
+        this.transactions = data;
+
+      }
+
+    });
+
+  }
+
+  exportCSV() {
+
+    let csvContent =
+
+  `Title,Category,Type,Amount\n`;
+
+    this.transactions.forEach(
+
+      (transaction) => {
+
+        csvContent +=
+
+  `${transaction.title},
+  ${transaction.category},
+  ${transaction.type},
+  ${transaction.amount}\n`;
+
+      }
+
+    );
+
+    const blob = new Blob(
+
+      [csvContent],
+
+      {
+
+        type: 'text/csv;charset=utf-8;'
+
+      }
+
+    );
+
+    const link = document.createElement('a');
+
+    const url =
+    URL.createObjectURL(blob);
+
+    link.setAttribute('href', url);
+
+    link.setAttribute(
+
+      'download',
+
+      'financial-report.csv'
+
+    );
+
+    link.click();
 
   }
 
