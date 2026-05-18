@@ -351,3 +351,34 @@ select {
     rgba(239,68,68,0.25);
 
 }
+
+.edit-button {
+
+  width: 45px;
+  height: 45px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background:
+    rgba(59,130,246,0.15);
+
+  color: #3b82f6;
+
+  cursor: pointer;
+
+  margin-right: 10px;
+
+  transition: 0.3s;
+
+}
+
+.edit-button:hover {
+
+  transform: scale(1.1);
+
+  background:
+    rgba(59,130,246,0.25);
+
+}

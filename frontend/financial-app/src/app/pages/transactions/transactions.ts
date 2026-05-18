@@ -37,6 +37,7 @@ export class TransactionsComponent implements OnInit {
   category = '';
   amount = 0;
   type = 'Income';
+  editingId: number | null = null;
 
   constructor(
     private http: HttpClient
@@ -56,6 +57,14 @@ export class TransactionsComponent implements OnInit {
   }
 
   addTransaction() {
+
+    if(this.editingId) {
+
+      this.updateTransaction();
+
+      return;
+
+    }
 
     const transaction = {
 
@@ -146,6 +155,68 @@ export class TransactionsComponent implements OnInit {
       next: () => {
 
         this.loadTransactions();
+
+      },
+
+      error: (err) => {
+
+        console.log(err);
+
+      }
+
+    });
+
+  }
+
+  editTransaction(transaction: any) {
+
+    this.editingId = transaction.id;
+
+    this.title = transaction.title;
+
+    this.category = transaction.category;
+
+    this.amount = transaction.amount;
+
+    this.type = transaction.type;
+
+    this.showModal = true;
+
+  }
+
+  updateTransaction() {
+
+    const transaction = {
+
+      id: this.editingId,
+
+      title: this.title,
+
+      category: this.category,
+
+      amount: this.amount,
+
+      type: this.type
+
+    };
+
+    this.http.post(
+
+      'http://localhost:8000/routes/update_transaction.php',
+
+      transaction
+
+    ).subscribe({
+
+      next: () => {
+
+        this.loadTransactions();
+
+        this.showModal = false;
+
+        this.clearForm();
+
+        this.editingId = null;
 
       },
 

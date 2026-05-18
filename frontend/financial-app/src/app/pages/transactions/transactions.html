@@ -96,13 +96,24 @@
           <td>
 
             <button
-              class="delete-button"
-              (click)="deleteTransaction(transaction.id)"
+                class="edit-button"
+                (click)="editTransaction(transaction)"
             >
-              <i class="bi bi-trash"></i>
+
+                <i class="bi bi-pencil"></i>
+
             </button>
 
-          </td>
+            <button
+                class="delete-button"
+                (click)="deleteTransaction(transaction.id)"
+            >
+
+                <i class="bi bi-trash"></i>
+
+            </button>
+
+            </td>
 
         </tr>
 
