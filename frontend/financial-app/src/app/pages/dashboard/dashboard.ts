@@ -39,6 +39,7 @@ implements OnInit, AfterViewInit {
   totalExpense = 0;
 
   totalBalance = 0;
+  chart: any;
 
   constructor(
     private http: HttpClient
@@ -72,6 +73,8 @@ implements OnInit, AfterViewInit {
 
         this.totalBalance = data.balance;
 
+        this.createChart();
+
       },
 
       error: (err) => {
@@ -86,34 +89,92 @@ implements OnInit, AfterViewInit {
 
   createChart() {
 
-    new Chart('financeChart', {
+    this.http.get<any>(
 
-      type: 'doughnut',
+      'http://localhost:8000/routes/chart_data.php'
 
-      data: {
+    ).subscribe({
 
-        labels: [
-          'Income',
-          'Expense'
-        ],
+      next: (data) => {
 
-        datasets: [
+        if(this.chart) {
+
+          this.chart.destroy();
+
+        }
+
+        this.chart = new Chart(
+
+          'financeChart',
 
           {
 
-            data: [
-              this.totalIncome,
-              this.totalExpense
-            ],
+            type: 'doughnut',
 
-            backgroundColor: [
-              '#10b981',
-              '#ef4444'
-            ]
+            data: {
+
+              labels: [
+                'Income',
+                'Expense'
+              ],
+
+              datasets: [
+
+                {
+
+                  data: [
+                    data.income,
+                    data.expense
+                  ],
+
+                  backgroundColor: [
+                    '#10b981',
+                    '#ef4444'
+                  ],
+
+                  borderWidth: 0
+
+                }
+
+              ]
+
+            },
+
+            options: {
+
+              responsive: true,
+
+              plugins: {
+
+                legend: {
+
+                  labels: {
+
+                    color: 'white',
+
+                    font: {
+
+                      size: 16
+
+                    }
+
+                  }
+
+                }
+
+              }
+
+            }
 
           }
 
-        ]
+        );
+
+      },
+
+      error: (err) => {
+
+        console.log(err);
 
       }
 
