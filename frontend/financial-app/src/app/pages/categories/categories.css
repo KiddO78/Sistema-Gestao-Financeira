@@ -222,3 +222,387 @@ button {
   color: #ef4444;
 
 }
+
+/* CARD HEADER */
+
+.card-header {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 25px;
+
+  margin-bottom: 35px;
+
+}
+
+.header-icon {
+
+  width: 90px;
+  height: 90px;
+
+  border-radius: 30px;
+
+  background:
+    rgba(139,92,246,0.15);
+
+  border:
+    2px solid rgba(139,92,246,0.4);
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  color: #8b5cf6;
+
+  font-size: 38px;
+
+  box-shadow:
+    0 0 30px rgba(139,92,246,0.2);
+
+}
+
+.card-header h2 {
+
+  color: white;
+
+  font-size: 42px;
+
+  margin-bottom: 8px;
+
+}
+
+.card-header p {
+
+  color: #94a3b8;
+
+  font-size: 18px;
+
+}
+
+/* FORM */
+
+form {
+
+  display: grid;
+
+  grid-template-columns:
+    1.2fr 0.9fr 260px;
+
+  gap: 25px;
+
+  align-items: end;
+
+}
+
+/* INPUT GROUP */
+
+.input-group {
+
+  display: flex;
+
+  flex-direction: column;
+
+}
+
+.input-group label {
+
+  color: white;
+
+  font-size: 18px;
+
+  margin-bottom: 15px;
+
+}
+
+/* INPUT */
+
+.input-container {
+
+  height: 75px;
+
+  border-radius: 22px;
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  background:
+    rgba(255,255,255,0.03);
+
+  display: flex;
+
+  align-items: center;
+
+  overflow: hidden;
+
+}
+
+.input-container i {
+
+  width: 70px;
+
+  display: flex;
+
+  justify-content: center;
+
+  color: #8b5cf6;
+
+  font-size: 24px;
+
+}
+
+.input-container input {
+
+  flex: 1;
+
+  height: 100%;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  color: white;
+
+  font-size: 18px;
+
+}
+
+/* SELECT */
+
+.select-container {
+
+  height: 75px;
+
+  border-radius: 22px;
+
+  border:
+    2px solid #8b5cf6;
+
+  background:
+    rgba(255,255,255,0.03);
+
+  display: flex;
+
+  align-items: center;
+
+  padding: 0 20px;
+
+  gap: 18px;
+
+}
+
+.type-dot {
+
+  width: 14px;
+  height: 14px;
+
+  border-radius: 50%;
+
+}
+
+.income-dot {
+
+  background: #10b981;
+
+}
+
+.expense-dot {
+
+  background: #ef4444;
+
+}
+
+.select-container select {
+
+  flex: 1;
+
+  background: transparent;
+
+  border: none;
+
+  outline: none;
+
+  color: white;
+
+  font-size: 22px;
+
+  appearance: none;
+
+}
+
+/* OPTIONS */
+
+select option {
+
+  background: #111827;
+
+  color: white;
+
+}
+
+/* BUTTON */
+
+button {
+
+  height: 75px;
+
+  border: none;
+
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7c3aed,
+      #8b5cf6
+    );
+
+  color: white;
+
+  font-size: 22px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 14px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+
+  box-shadow:
+    0 0 25px rgba(139,92,246,0.3);
+
+}
+
+button:hover {
+
+  transform: translateY(-3px);
+
+}
+
+button:disabled {
+
+  opacity: 0.5;
+
+  cursor: not-allowed;
+
+}
+
+/* CATEGORY GRID */
+
+.categories-grid {
+
+  margin-top: 40px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill,minmax(260px,1fr));
+
+  gap: 25px;
+
+}
+
+/* CARD */
+
+.category-card {
+
+  background:
+    rgba(255,255,255,0.05);
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  border-radius: 28px;
+
+  padding: 30px;
+
+  transition: 0.3s;
+
+}
+
+.category-card:hover {
+
+  transform: translateY(-5px);
+
+  border:
+    1px solid rgba(139,92,246,0.3);
+
+}
+
+/* ICON */
+
+.category-icon {
+
+  width: 70px;
+  height: 70px;
+
+  border-radius: 20px;
+
+  background:
+    rgba(139,92,246,0.15);
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  color: #8b5cf6;
+
+  font-size: 30px;
+
+  margin-bottom: 25px;
+
+}
+
+/* TITLE */
+
+.category-card h3 {
+
+  color: white;
+
+  font-size: 24px;
+
+  margin-bottom: 20px;
+
+}
+
+/* BADGE */
+
+.category-type {
+
+  padding: 10px 18px;
+
+  border-radius: 14px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+}
+
+.category-type.income {
+
+  background:
+    rgba(16,185,129,0.15);
+
+  color: #10b981;
+
+}
+
+.category-type.expense {
+
+  background:
+    rgba(239,68,68,0.15);
+
+  color: #ef4444;
+
+}

@@ -38,6 +38,7 @@ export class TransactionsComponent implements OnInit {
   amount = 0;
   type = 'Income';
   editingId: number | null = null;
+  categories: any[] = [];
 
   constructor(
     private http: HttpClient
@@ -47,6 +48,7 @@ export class TransactionsComponent implements OnInit {
   ngOnInit() {
 
     this.loadTransactions();
+    this.loadCategories();
 
   }
 
@@ -217,6 +219,30 @@ export class TransactionsComponent implements OnInit {
         this.clearForm();
 
         this.editingId = null;
+
+      },
+
+      error: (err) => {
+
+        console.log(err);
+
+      }
+
+    });
+
+  }
+
+  loadCategories() {
+
+    this.http.get<any[]>(
+
+      'http://localhost:8000/routes/get_categories.php'
+
+    ).subscribe({
+
+      next: (data) => {
+
+        this.categories = data;
 
       },
 

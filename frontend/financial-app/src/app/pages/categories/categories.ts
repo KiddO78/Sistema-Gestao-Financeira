@@ -72,6 +72,14 @@ implements OnInit {
 
   addCategory() {
 
+    if(!this.name.trim()) {
+
+      alert('Category name is required');
+
+      return;
+
+    }
+
     const category = {
 
       name: this.name,
@@ -95,6 +103,12 @@ implements OnInit {
         this.name = '';
 
         this.type = 'Expense';
+
+      },
+
+      error: (err) => {
+
+        console.log(err);
 
       }
 

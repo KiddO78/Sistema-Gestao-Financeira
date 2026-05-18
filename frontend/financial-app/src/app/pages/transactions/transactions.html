@@ -161,15 +161,37 @@
 
         <label>Category</label>
 
-        <input
-            type="text"
-
-            placeholder="Category"
+        <select
 
             [(ngModel)]="category"
 
             name="category"
-        >
+
+            >
+
+            <option value="">
+
+                Select Category
+
+            </option>
+
+            <option
+
+                *ngFor="
+                let cat of categories
+                "
+
+                [value]="cat.name"
+
+            >
+
+                {{ cat.name }}
+
+                ({{ cat.type }})
+
+            </option>
+
+        </select>
 
         <label>Amount</label>
 

@@ -18,51 +18,115 @@
 
   </div>
 
-  <!-- ADD CATEGORY -->
+  <!-- ADD CATEGORY CARD -->
 
   <div class="add-category-card">
 
-    <h2>Add Category</h2>
+    <div class="card-header">
 
-    <form
-      (ngSubmit)="addCategory()"
-    >
+      <div class="header-icon">
 
-      <input
+        <i class="bi bi-tag"></i>
 
-        type="text"
+      </div>
 
-        placeholder="Category name"
+      <div>
 
-        [(ngModel)]="name"
+        <h2>Add Category</h2>
 
-        name="name"
+        <p>
+          Create a new category to organize your finances
+        </p>
+
+      </div>
+
+    </div>
+
+    <form (ngSubmit)="addCategory()">
+
+      <!-- NAME -->
+
+      <div class="input-group">
+
+        <label>Category Name</label>
+
+        <div class="input-container">
+
+          <i class="bi bi-tag"></i>
+
+          <input
+
+            type="text"
+
+            placeholder="Enter category name"
+
+            [(ngModel)]="name"
+
+            name="name"
+
+          >
+
+        </div>
+
+      </div>
+
+      <!-- TYPE -->
+
+      <div class="input-group">
+
+        <label>Category Type</label>
+
+        <div class="select-container">
+
+          <span
+
+            class="type-dot"
+
+            [class.income-dot]="type === 'Income'"
+
+            [class.expense-dot]="type === 'Expense'"
+
+          ></span>
+
+          <select
+
+            [(ngModel)]="type"
+
+            name="type"
+
+          >
+
+            <option value="Income">
+
+              Income
+
+            </option>
+
+            <option value="Expense">
+
+              Expense
+
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+      <!-- BUTTON -->
+
+      <button
+
+        type="submit"
+
+        [disabled]="!name.trim()"
 
       >
-
-      <select
-
-        [(ngModel)]="type"
-
-        name="type"
-
-      >
-
-        <option>
-          Income
-        </option>
-
-        <option>
-          Expense
-        </option>
-
-      </select>
-
-      <button type="submit">
 
         <i class="bi bi-plus-lg"></i>
 
-        Add
+        Add Category
 
       </button>
 
@@ -75,24 +139,29 @@
   <div class="categories-grid">
 
     <div
+
       class="category-card"
 
       *ngFor="
         let category of categories
       "
+
     >
 
       <div class="category-icon">
 
-        <i class="bi bi-tag"></i>
+        <i class="bi bi-tag-fill"></i>
 
       </div>
 
       <h3>
+
         {{ category.name }}
+
       </h3>
 
       <span
+
         class="category-type"
 
         [class.income]="
@@ -102,6 +171,7 @@
         [class.expense]="
           category.type === 'Expense'
         "
+
       >
 
         {{ category.type }}
