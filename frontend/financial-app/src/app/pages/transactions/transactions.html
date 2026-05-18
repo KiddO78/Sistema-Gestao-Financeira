@@ -2,13 +2,26 @@
 
 <div class="transactions-page">
 
+  <!-- TOPBAR -->
+
   <div class="topbar">
 
-    <h1>Transactions</h1>
+    <div>
 
-    <button (click)="showModal = true">
+      <h1>Transactions</h1>
 
-      <i class="bi bi-plus"></i>
+      <p>
+        Manage your financial transactions
+      </p>
+
+    </div>
+
+    <button
+      class="add-button"
+      (click)="showModal = true"
+    >
+
+      <i class="bi bi-plus-lg"></i>
 
       Add Transaction
 
@@ -43,10 +56,40 @@
 
           <td>{{ transaction.category }}</td>
 
-          <td>{{ transaction.type }}</td>
+          <td>
+
+            <span
+              class="type"
+              [class.income]="
+                transaction.type === 'Income'
+              "
+              [class.expense]="
+                transaction.type === 'Expense'
+              "
+            >
+
+              {{ transaction.type }}
+
+            </span>
+
+          </td>
 
           <td>
-            AOA {{ transaction.amount }}
+
+            <span
+              [class.income-text]="
+                transaction.type === 'Income'
+              "
+
+              [class.expense-text]="
+                transaction.type === 'Expense'
+              "
+            >
+
+              AOA {{ transaction.amount }}
+
+            </span>
+
           </td>
 
         </tr>
@@ -54,6 +97,74 @@
       </tbody>
 
     </table>
+
+  </div>
+
+  <!-- MODAL -->
+
+  <div
+    class="modal-overlay"
+    *ngIf="showModal"
+  >
+
+    <div class="modal">
+
+      <div class="modal-header">
+
+        <h2>Add Transaction</h2>
+
+        <button
+          class="close-button"
+          (click)="showModal = false"
+        >
+          ✕
+        </button>
+
+      </div>
+
+      <form>
+
+        <label>Title</label>
+
+        <input
+          type="text"
+          placeholder="Transaction title"
+        >
+
+        <label>Category</label>
+
+        <input
+          type="text"
+          placeholder="Category"
+        >
+
+        <label>Amount</label>
+
+        <input
+          type="number"
+          placeholder="Amount"
+        >
+
+        <label>Type</label>
+
+        <select>
+
+          <option>Income</option>
+
+          <option>Expense</option>
+
+        </select>
+
+        <button
+          type="submit"
+          class="save-button"
+        >
+          Save Transaction
+        </button>
+
+      </form>
+
+    </div>
 
   </div>
 
