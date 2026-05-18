@@ -1,7 +1,11 @@
 import {
   Component,
+  OnInit,
   AfterViewInit
 } from '@angular/core';
+
+import { HttpClient }
+from '@angular/common/http';
 
 import { SidebarComponent }
 from '../../components/sidebar/sidebar';
@@ -14,123 +18,102 @@ import {
 Chart.register(...registerables);
 
 @Component({
+
   selector: 'app-dashboard',
+
   standalone: true,
+
   imports: [SidebarComponent],
+
   templateUrl: './dashboard.html',
+
   styleUrl: './dashboard.css'
+
 })
 
 export class DashboardComponent
-implements AfterViewInit {
+implements OnInit, AfterViewInit {
+
+  totalIncome = 0;
+
+  totalExpense = 0;
+
+  totalBalance = 0;
+
+  constructor(
+    private http: HttpClient
+  ) {}
+
+  ngOnInit(): void {
+
+    this.loadStats();
+
+  }
 
   ngAfterViewInit(): void {
 
+    this.createChart();
+
+  }
+
+  loadStats() {
+
+    this.http.get<any>(
+
+      'http://localhost:8000/routes/dashboard_stats.php'
+
+    ).subscribe({
+
+      next: (data) => {
+
+        this.totalIncome = data.income;
+
+        this.totalExpense = data.expense;
+
+        this.totalBalance = data.balance;
+
+      },
+
+      error: (err) => {
+
+        console.log(err);
+
+      }
+
+    });
+
+  }
+
+  createChart() {
+
     new Chart('financeChart', {
 
-      type: 'line',
+      type: 'doughnut',
 
       data: {
 
         labels: [
-          'Jan',
-          'Feb',
-          'Mar',
-          'Apr',
-          'May',
-          'Jun'
+          'Income',
+          'Expense'
         ],
 
         datasets: [
 
           {
-            label: 'Income',
 
             data: [
-              120,
-              190,
-              300,
-              250,
-              420,
-              500
+              this.totalIncome,
+              this.totalExpense
             ],
 
-            borderColor: '#10b981',
+            backgroundColor: [
+              '#10b981',
+              '#ef4444'
+            ]
 
-            backgroundColor:
-              'rgba(16,185,129,0.2)',
-
-            tension: 0.4,
-
-            fill: true
-          },
-
-          {
-            label: 'Expenses',
-
-            data: [
-              80,
-              100,
-              180,
-              170,
-              210,
-              260
-            ],
-
-            borderColor: '#ef4444',
-
-            backgroundColor:
-              'rgba(239,68,68,0.2)',
-
-            tension: 0.4,
-
-            fill: true
           }
 
         ]
-      },
-
-      options: {
-
-        responsive: true,
-
-        plugins: {
-
-          legend: {
-
-            labels: {
-
-              color: 'white'
-
-            }
-
-          }
-
-        },
-
-        scales: {
-
-          x: {
-
-            ticks: {
-
-              color: '#cbd5e1'
-
-            }
-
-          },
-
-          y: {
-
-            ticks: {
-
-              color: '#cbd5e1'
-
-            }
-
-          }
-
-        }
 
       }
 
