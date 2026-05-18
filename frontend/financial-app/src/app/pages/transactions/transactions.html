@@ -1,1 +1,60 @@
-<p>transactions works!</p>
+<app-sidebar></app-sidebar>
+
+<div class="transactions-page">
+
+  <div class="topbar">
+
+    <h1>Transactions</h1>
+
+    <button (click)="showModal = true">
+
+      <i class="bi bi-plus"></i>
+
+      Add Transaction
+
+    </button>
+
+  </div>
+
+  <!-- TABLE -->
+
+  <div class="table-container">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Title</th>
+          <th>Category</th>
+          <th>Type</th>
+          <th>Amount</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let transaction of transactions">
+
+          <td>{{ transaction.title }}</td>
+
+          <td>{{ transaction.category }}</td>
+
+          <td>{{ transaction.type }}</td>
+
+          <td>
+            AOA {{ transaction.amount }}
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
