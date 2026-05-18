@@ -1,1 +1,73 @@
-<p>reports works!</p>
+<app-sidebar></app-sidebar>
+
+<div class="reports-page">
+
+  <!-- HEADER -->
+
+  <div class="reports-header">
+
+    <div>
+
+      <h1>Financial Reports</h1>
+
+      <p>
+        Analyze your financial performance
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- STATS -->
+
+  <div class="stats-grid">
+
+    <!-- INCOME -->
+
+    <div class="stat-card income">
+
+      <h3>Income</h3>
+
+      <h2>
+        AOA {{ totalIncome }}
+      </h2>
+
+    </div>
+
+    <!-- EXPENSE -->
+
+    <div class="stat-card expense">
+
+      <h3>Expense</h3>
+
+      <h2>
+        AOA {{ totalExpense }}
+      </h2>
+
+    </div>
+
+    <!-- BALANCE -->
+
+    <div class="stat-card balance">
+
+      <h3>Balance</h3>
+
+      <h2>
+        AOA {{ totalBalance }}
+      </h2>
+
+    </div>
+
+  </div>
+
+  <!-- CHART -->
+
+  <div class="chart-card">
+
+    <h2>Financial Analytics</h2>
+
+    <canvas id="reportChart"></canvas>
+
+  </div>
+
+</div>
