@@ -15,6 +15,9 @@ import {
   registerables
 } from 'chart.js';
 
+import { jsPDF } from 'jspdf';
+import { autoTable } from 'jspdf-autotable';
+
 Chart.register(...registerables);
 
 @Component({
@@ -226,7 +229,7 @@ implements OnInit, AfterViewInit {
 
     let csvContent =
 
-  `Title,Category,Type,Amount\n`;
+  `Title;Category;Type;Amount\n`;
 
     this.transactions.forEach(
 
@@ -234,10 +237,7 @@ implements OnInit, AfterViewInit {
 
         csvContent +=
 
-  `${transaction.title},
-  ${transaction.category},
-  ${transaction.type},
-  ${transaction.amount}\n`;
+  `${transaction.title};${transaction.category};${transaction.type};${transaction.amount}\n`;
 
       }
 
@@ -255,22 +255,168 @@ implements OnInit, AfterViewInit {
 
     );
 
-    const link = document.createElement('a');
+    const link =
+    document.createElement('a');
 
     const url =
     URL.createObjectURL(blob);
 
-    link.setAttribute('href', url);
+    link.href = url;
 
-    link.setAttribute(
+    link.download =
+    'financial-report.csv';
 
-      'download',
+    link.click();
 
-      'financial-report.csv'
+  }
+
+  exportPDF() {
+
+    const doc = new jsPDF();
+
+    /* TITLE */
+
+    doc.setFontSize(24);
+
+    doc.text(
+
+      'HATinFinance Financial Report',
+
+      20,
+
+      25
 
     );
 
-    link.click();
+    /* DATE */
+
+    doc.setFontSize(12);
+
+    doc.text(
+
+      `Generated: ${new Date().toLocaleString()}`,
+
+      20,
+
+      35
+
+    );
+
+    /* SUMMARY */
+
+    doc.setFontSize(18);
+
+    doc.text(
+
+      'Financial Summary',
+
+      20,
+
+      55
+
+    );
+
+    autoTable(doc, {
+
+      startY: 65,
+
+      head: [
+
+        ['Description', 'Value']
+
+      ],
+
+      body: [
+
+        [
+
+          'Total Income',
+
+          `AOA ${this.totalIncome}`
+
+        ],
+
+        [
+
+          'Total Expense',
+
+          `AOA ${this.totalExpense}`
+
+        ],
+
+        [
+
+          'Balance',
+
+          `AOA ${this.totalBalance}`
+
+        ]
+
+      ]
+
+    });
+
+    /* TRANSACTIONS */
+
+    doc.setFontSize(18);
+
+    doc.text(
+
+      'Transactions',
+
+      20,
+
+      120
+
+    );
+
+    autoTable(doc, {
+
+      startY: 130,
+
+      head: [
+
+        [
+
+          'Title',
+
+          'Category',
+
+          'Type',
+
+          'Amount'
+
+        ]
+
+      ],
+
+      body:
+
+        this.transactions.map(
+
+          (transaction) => [
+
+            transaction.title,
+
+            transaction.category,
+
+            transaction.type,
+
+            transaction.amount
+
+          ]
+
+        )
+
+    });
+
+    /* SAVE */
+
+    doc.save(
+
+      'financial-report.pdf'
+
+    );
 
   }
 

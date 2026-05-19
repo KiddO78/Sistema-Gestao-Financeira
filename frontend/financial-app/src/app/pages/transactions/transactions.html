@@ -29,6 +29,56 @@
 
   </div>
 
+    <div class="filters-section">
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <i class="bi bi-search"></i>
+
+            <input
+
+            type="text"
+
+            placeholder="Search transactions..."
+
+            [(ngModel)]="searchText"
+
+            >
+
+        </div>
+
+        <!-- FILTER -->
+
+        <select
+
+            [(ngModel)]="filterType"
+
+        >
+
+            <option value="All">
+
+            All
+
+            </option>
+
+            <option value="Income">
+
+            Income
+
+            </option>
+
+            <option value="Expense">
+
+            Expense
+
+            </option>
+
+        </select>
+
+    </div>
+
   <!-- TABLE -->
 
   <div class="table-container">
@@ -51,7 +101,7 @@
 
       <tbody>
 
-        <tr *ngFor="let transaction of transactions">
+        <tr *ngFor="let transaction of filteredTransactions">
 
           <td>{{ transaction.title }}</td>
 

@@ -39,6 +39,8 @@ export class TransactionsComponent implements OnInit {
   type = 'Income';
   editingId: number | null = null;
   categories: any[] = [];
+  searchText = '';
+  filterType = 'All';
 
   constructor(
     private http: HttpClient
@@ -253,6 +255,43 @@ export class TransactionsComponent implements OnInit {
       }
 
     });
+
+  }
+
+  get filteredTransactions() {
+
+    return this.transactions.filter(
+
+      (transaction) => {
+
+        const matchesSearch =
+
+        transaction.title
+        .toLowerCase()
+        .includes(
+
+          this.searchText
+          .toLowerCase()
+
+        );
+
+        const matchesType =
+
+        this.filterType === 'All'
+
+        ||
+
+        transaction.type ===
+        this.filterType;
+
+        return (
+          matchesSearch &&
+          matchesType
+        );
+
+      }
+
+    );
 
   }
 
