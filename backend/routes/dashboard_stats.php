@@ -1,6 +1,7 @@
 <?php
 
 header("Access-Control-Allow-Origin: *");
+
 header("Content-Type: application/json");
 
 include "../config/database.php";
@@ -8,44 +9,50 @@ include "../config/database.php";
 /* TOTAL INCOME */
 
 $incomeQuery = "
-SELECT SUM(amount) AS totalIncome
+
+SELECT SUM(amount) as total
+
 FROM transactions
-WHERE type = 'Income'
+
+WHERE type='Income'
+
 ";
 
 $incomeResult =
 $conn->query($incomeQuery);
 
-$totalIncome =
-$incomeResult
-->fetch_assoc()["totalIncome"] ?? 0;
+$income =
+$incomeResult->fetch_assoc()['total'] ?? 0;
 
 /* TOTAL EXPENSE */
 
 $expenseQuery = "
-SELECT SUM(amount) AS totalExpense
+
+SELECT SUM(amount) as total
+
 FROM transactions
-WHERE type = 'Expense'
+
+WHERE type='Expense'
+
 ";
 
 $expenseResult =
 $conn->query($expenseQuery);
 
-$totalExpense =
-$expenseResult
-->fetch_assoc()["totalExpense"] ?? 0;
+$expense =
+$expenseResult->fetch_assoc()['total'] ?? 0;
 
 /* BALANCE */
 
 $balance =
-$totalIncome - $totalExpense;
+$income - $expense;
 
 echo json_encode([
 
-    "income" => $totalIncome,
+  "income" => $income,
 
-    "expense" => $totalExpense,
+  "expense" => $expense,
 
-    "balance" => $balance
+  "balance" => $balance
 
 ]);

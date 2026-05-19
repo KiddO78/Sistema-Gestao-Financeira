@@ -20,4 +20,10 @@ export const routes: Routes = [
   { path: 'goals', component: GoalsComponent },
   { path: 'reports', component: ReportsComponent },
   { path: 'settings', component: SettingsComponent },
+  { 
+    path: 'goals', 
+    loadComponent: (): => 
+      import('./pages/goals/goals')
+      .then(m => m.GoalsComponent) 
+  }
 ];

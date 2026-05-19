@@ -1,1 +1,167 @@
-<p>goals works!</p>
+<app-sidebar></app-sidebar>
+
+<div class="goals-page">
+
+  <!-- HEADER -->
+
+  <div class="goals-header">
+
+    <div>
+
+      <h1>Goals</h1>
+
+      <p>
+        Track your financial goals
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- ADD GOAL -->
+
+  <div class="goal-form-card">
+
+    <h2>Add Goal</h2>
+
+    <form (ngSubmit)="addGoal()">
+
+      <input
+
+        type="text"
+
+        placeholder="Goal title"
+
+        [(ngModel)]="title"
+
+        name="title"
+
+      >
+
+      <input
+
+        type="number"
+
+        placeholder="Target amount"
+
+        [(ngModel)]="target_amount"
+
+        name="target_amount"
+
+      >
+
+      <input
+
+        type="number"
+
+        placeholder="Current amount"
+
+        [(ngModel)]="current_amount"
+
+        name="current_amount"
+
+      >
+
+      <input
+
+        type="date"
+
+        [(ngModel)]="deadline"
+
+        name="deadline"
+
+      >
+
+      <button type="submit">
+
+        Add Goal
+
+      </button>
+
+    </form>
+
+  </div>
+
+  <!-- GOALS LIST -->
+
+  <div class="goals-grid">
+
+    <div
+
+      class="goal-card"
+
+      *ngFor="
+        let goal of goals
+      "
+
+    >
+
+      <!-- TOP -->
+
+      <div class="goal-top">
+
+        <div>
+
+          <h2>
+
+            {{ goal.title }}
+
+          </h2>
+
+          <p>
+
+            Deadline:
+            {{ goal.deadline }}
+
+          </p>
+
+        </div>
+
+        <div class="goal-percentage">
+
+          {{ getProgress(goal)
+          | number:'1.0-0' }}%
+
+        </div>
+
+      </div>
+
+      <!-- MONEY -->
+
+      <div class="goal-money">
+
+        <span>
+
+          AOA {{ goal.current_amount }}
+
+        </span>
+
+        <span>
+
+          / AOA {{ goal.target_amount }}
+
+        </span>
+
+      </div>
+
+      <!-- BAR -->
+
+      <div class="progress-bar">
+
+        <div
+
+          class="progress-fill"
+
+          [style.width.%]="
+            getProgress(goal)
+          "
+
+        ></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
