@@ -121,10 +121,9 @@
 
 .goals-grid {
 
-  display: grid;
+  display: flex;
 
-  grid-template-columns:
-    repeat(auto-fill,minmax(350px,1fr));
+  flex-direction: column;
 
   gap: 25px;
 
@@ -229,5 +228,415 @@
       #10b981,
       #34d399
     );
+
+}
+
+/* HEADER */
+
+.goals-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+}
+
+/* NEW BUTTON */
+
+.new-goal-button {
+
+  height: 60px;
+
+  padding: 0 28px;
+
+  border: none;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7c3aed,
+      #8b5cf6
+    );
+
+  color: white;
+
+  font-size: 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  cursor: pointer;
+
+}
+
+/* OVERLAY */
+
+.modal-overlay {
+
+  position: fixed;
+
+  inset: 0;
+
+  background:
+    rgba(0,0,0,0.6);
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  z-index: 999;
+
+}
+
+/* MODAL */
+
+.goal-modal {
+
+  width: 500px;
+
+  background: white;
+
+  border-radius: 28px;
+
+  padding: 35px;
+
+}
+
+/* HEADER */
+
+.modal-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 25px;
+
+}
+
+.modal-header h2 {
+
+  font-size: 28px;
+
+}
+
+/* CLOSE */
+
+.close-button {
+
+  border: none;
+
+  background: transparent;
+
+  font-size: 22px;
+
+  cursor: pointer;
+
+  color: white;
+
+}
+
+/* FORM */
+
+.goal-modal form {
+
+  display: flex;
+
+  flex-direction: column;
+
+}
+
+.goal-modal {
+
+  width: 500px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #111827,
+      #1e1b4b
+    );
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  border-radius: 28px;
+
+  padding: 35px;
+
+  color: white;
+
+}
+
+.goal-modal input {
+
+  height: 58px;
+
+  border-radius: 16px;
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  background:
+    rgba(255,255,255,0.05);
+
+  color: white;
+
+  padding: 0 18px;
+
+  font-size: 16px;
+
+  outline: none;
+
+}
+
+.goal-modal input::placeholder {
+
+  color: #94a3b8;
+
+}
+
+.goal-modal label {
+
+  color: white;
+
+}
+
+/* ICONS */
+
+.icon-picker {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 10px;
+
+}
+
+.icon-option {
+
+  width: 50px;
+
+  height: 50px;
+
+  border-radius: 14px;
+
+  border: 2px solid #e5e7eb;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  cursor: pointer;
+
+  font-size: 22px;
+
+}
+
+.selected-icon {
+
+  border:
+    2px solid #8b5cf6;
+
+  background:
+    rgba(139,92,246,0.1);
+
+}
+
+/* COLORS */
+
+.color-picker {
+
+  display: flex;
+
+  gap: 12px;
+
+  margin-top: 10px;
+
+}
+
+.color-option {
+
+  width: 35px;
+
+  height: 35px;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+
+}
+
+.selected-color {
+
+  border:
+    4px solid white;
+
+  box-shadow:
+    0 0 0 3px #8b5cf6;
+
+}
+
+/* ACTIONS */
+
+.modal-actions {
+
+  display: flex;
+
+  gap: 15px;
+
+  margin-top: 35px;
+
+}
+
+.cancel-button {
+
+  flex: 1;
+
+  height: 55px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  background:
+    rgba(255,255,255,0.08);
+
+  color: white;
+
+  cursor: pointer;
+
+}
+
+.create-button {
+
+  flex: 1;
+
+  height: 55px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7c3aed,
+      #8b5cf6
+    );
+
+  color: white;
+
+  cursor: pointer;
+
+}
+
+/* ACTIONS */
+
+.goal-actions {
+
+  display: flex;
+
+  gap: 10px;
+
+}
+
+.edit-button,
+.delete-button {
+
+  width: 42px;
+
+  height: 42px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  cursor: pointer;
+
+  color: white;
+
+  font-size: 18px;
+
+}
+
+.edit-button {
+
+  background:
+    rgba(59,130,246,0.2);
+
+  color: #60a5fa;
+
+}
+
+.delete-button {
+
+  background:
+    rgba(239,68,68,0.2);
+
+  color: #ef4444;
+
+}
+
+/* EDIT */
+
+.edit-section {
+
+  display: flex;
+
+  gap: 12px;
+
+  margin-top: 18px;
+
+}
+
+.edit-section input {
+
+  flex: 1;
+
+  height: 50px;
+
+  border-radius: 14px;
+
+  border: none;
+
+  padding: 0 16px;
+
+}
+
+.edit-section button {
+
+  width: 100px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7c3aed,
+      #8b5cf6
+    );
+
+  color: white;
+
+  cursor: pointer;
 
 }

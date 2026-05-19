@@ -16,71 +16,21 @@
 
     </div>
 
-  </div>
+    <button
 
-  <!-- ADD GOAL -->
+        class="new-goal-button"
 
-  <div class="goal-form-card">
+        (click)="showModal = true"
 
-    <h2>Add Goal</h2>
+        >
 
-    <form (ngSubmit)="addGoal()">
+        <i class="bi bi-plus-lg"></i>
 
-      <input
+        New Goal
 
-        type="text"
+        </button>
 
-        placeholder="Goal title"
-
-        [(ngModel)]="title"
-
-        name="title"
-
-      >
-
-      <input
-
-        type="number"
-
-        placeholder="Target amount"
-
-        [(ngModel)]="target_amount"
-
-        name="target_amount"
-
-      >
-
-      <input
-
-        type="number"
-
-        placeholder="Current amount"
-
-        [(ngModel)]="current_amount"
-
-        name="current_amount"
-
-      >
-
-      <input
-
-        type="date"
-
-        [(ngModel)]="deadline"
-
-        name="deadline"
-
-      >
-
-      <button type="submit">
-
-        Add Goal
-
-      </button>
-
-    </form>
-
-  </div>
+    </div>
 
   <!-- GOALS LIST -->
 
@@ -98,70 +48,322 @@
 
       <!-- TOP -->
 
-      <div class="goal-top">
+        <div class="goal-top">
 
-        <div>
+            <div>
 
-          <h2>
+                <h2>
 
-            {{ goal.title }}
+                    {{ goal.title }}
 
-          </h2>
+                </h2>
 
-          <p>
+                <p>
 
-            Deadline:
-            {{ goal.deadline }}
+                    Deadline:
+                    {{ goal.deadline }}
 
-          </p>
+                </p>
+
+            </div>
+
+            <div class="goal-percentage">
+
+                {{ getProgress(goal)
+                | number:'1.0-0' }}%
+
+            </div>
+
+            <div class="goal-actions">
+
+                <!-- EDIT -->
+
+                <button
+
+                    class="edit-button"
+
+                    (click)="startEdit(goal)"
+
+                >
+
+                    <i class="bi bi-pencil"></i>
+
+                </button>
+
+                <!-- DELETE -->
+
+                <button
+
+                    class="delete-button"
+
+                    (click)="deleteGoal(goal.id)"
+
+                >
+
+                    <i class="bi bi-trash"></i>
+
+                </button>
+
+            </div>
 
         </div>
-
-        <div class="goal-percentage">
-
-          {{ getProgress(goal)
-          | number:'1.0-0' }}%
-
-        </div>
-
-      </div>
 
       <!-- MONEY -->
 
-      <div class="goal-money">
+        <div class="goal-money">
 
-        <span>
+            <div
 
-          AOA {{ goal.current_amount }}
+            class="edit-section"
 
-        </span>
+            *ngIf="
+                editingGoalId === goal.id
+            "
 
-        <span>
+            >
 
-          / AOA {{ goal.target_amount }}
+                <input
 
-        </span>
+                    type="number"
 
-      </div>
+                    [(ngModel)]="editAmount"
+
+                >
+
+                <button
+
+                    (click)="saveEdit(goal)"
+
+                >
+
+                    Save
+
+                </button>
+
+            </div>
+
+            <span>
+
+            AOA {{ goal.current_amount }}
+
+            </span>
+
+            <span>
+
+            / AOA {{ goal.target_amount }}
+
+            </span>
+
+        </div>
 
       <!-- BAR -->
 
-      <div class="progress-bar">
+        <div class="progress-bar">
 
-        <div
+            <div
 
-          class="progress-fill"
+            class="progress-fill"
 
-          [style.width.%]="
-            getProgress(goal)
-          "
+            [style.width.%]="
+                getProgress(goal)
+            "
 
-        ></div>
+            ></div>
 
-      </div>
+        </div>
 
     </div>
 
   </div>
+
+  <!-- MODAL -->
+
+    <div
+
+    class="modal-overlay"
+
+    *ngIf="showModal"
+
+    >
+
+        <div class="goal-modal">
+
+            <!-- TOP -->
+
+            <div class="modal-header">
+
+            <h2>New Goal</h2>
+
+            <button
+
+                class="close-button"
+
+                (click)="showModal = false"
+
+            >
+
+                <i class="bi bi-x-lg"></i>
+
+            </button>
+
+            </div>
+
+            <!-- FORM -->
+
+            <form (ngSubmit)="addGoal()">
+
+            <!-- TITLE -->
+
+            <label>Goal Name</label>
+
+            <input
+
+                type="text"
+
+                placeholder="Ex: Emergency Fund"
+
+                [(ngModel)]="title"
+
+                name="title"
+
+            >
+
+            <!-- TARGET -->
+
+            <label>Target Amount</label>
+
+            <input
+
+                type="number"
+
+                placeholder="AOA 0"
+
+                [(ngModel)]="target_amount"
+
+                name="target_amount"
+
+            >
+
+            <!-- CURRENT -->
+
+            <label>Current Amount</label>
+
+            <input
+
+                type="number"
+
+                placeholder="AOA 0"
+
+                [(ngModel)]="current_amount"
+
+                name="current_amount"
+
+            >
+
+            <!-- DEADLINE -->
+
+            <label>Deadline</label>
+
+            <input
+
+                type="date"
+
+                [(ngModel)]="deadline"
+
+                name="deadline"
+
+                [min]="today"
+
+            >
+
+            <!-- ICONS -->
+
+            <label>Icon</label>
+
+            <div class="icon-picker">
+
+                <div
+
+                class="icon-option"
+
+                *ngFor="let icon of icons"
+
+                [class.selected-icon]="
+                    selectedIcon === icon
+                "
+
+                (click)="selectedIcon = icon"
+
+                >
+
+                <i class="bi {{ icon }}"></i>
+
+                </div>
+
+            </div>
+
+            <!-- COLORS -->
+
+            <label>Color</label>
+
+            <div class="color-picker">
+
+                <div
+
+                class="color-option"
+
+                *ngFor="let color of colors"
+
+                [style.background]="color"
+
+                [class.selected-color]="
+                    selectedColor === color
+                "
+
+                (click)="selectedColor = color"
+
+                >
+
+                </div>
+
+            </div>
+
+            <!-- ACTIONS -->
+
+            <div class="modal-actions">
+
+                <button
+
+                type="button"
+
+                class="cancel-button"
+
+                (click)="showModal = false"
+
+                >
+
+                Cancel
+
+                </button>
+
+                <button
+
+                type="submit"
+
+                class="create-button"
+
+                >
+
+                Create
+
+                </button>
+
+            </div>
+
+            </form>
+
+        </div>
+
+    </div>
 
 </div>

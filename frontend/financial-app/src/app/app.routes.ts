@@ -22,8 +22,8 @@ export const routes: Routes = [
   { path: 'settings', component: SettingsComponent },
   { 
     path: 'goals', 
-    loadComponent: (): => 
+    loadComponent: () => 
       import('./pages/goals/goals')
       .then(m => m.GoalsComponent) 
-  }
+  },
 ];
